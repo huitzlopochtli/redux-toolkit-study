@@ -7,6 +7,7 @@ function App() {
       <Link to={"/"}>Home</Link> <br />
       <Link to={"/Contact"}>Contact</Link> <br />
       <Link to={"/Counter"}>Counter</Link> <br />
+      <Link to={"/Posts"}>Posts</Link> <br />
     </>
   );
 }

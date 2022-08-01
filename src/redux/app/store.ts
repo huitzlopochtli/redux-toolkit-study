@@ -3,6 +3,7 @@ import { createBrowserHistory } from "history";
 import { createReduxHistoryContext } from "redux-first-history";
 import counterAmountReducer from "../features/counter/counter-amount-slice";
 import counterReducer from "../features/counter/counter-slice";
+import apiPostsReducer, { apiPostsSlice } from "../features/Posts/api-posts-slice";
 
 const { createReduxHistory, routerMiddleware, routerReducer } =
   createReduxHistoryContext({ history: createBrowserHistory() });
@@ -14,10 +15,15 @@ export const store = configureStore({
     router: routerReducer,
     counter: counterReducer,
     counterAmount: counterAmountReducer,
+    [apiPostsSlice.reducerPath]: apiPostsReducer,
   },
-  middleware: [routerMiddleware],
+  // middleware: [routerMiddleware],
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware()
+      .concat(routerMiddleware)
+      .concat(apiPostsSlice.middleware);
+  },
 });
-store.subscribe(() => console.log(store.getState()));
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 // Inferred type: { counter: CounterState; }
