@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import Contact from "../components/Contact/Contact";
-import Counter from "../components/Counter/Counter";
-import Home from "../components/Home/Home";
+import Contact from "./components/Contact/Contact";
+import Counter from "./components/Counter/Counter";
+import Home from "./components/Home/Home";
 
 export default function AppRoutes() {
   return (

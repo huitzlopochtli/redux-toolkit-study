@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { history, store } from "../../redux/app/store";
 import {
   useGlobalAppDispatch,
   useGlobalAppSelector,
 } from "../../redux/app/store-hooks";
+import { setCounterAmount } from "../../redux/features/counter/counter-amount-slice";
 import {
   decrement,
   decrementByAmount,
@@ -12,7 +14,9 @@ import {
 } from "../../redux/features/counter/counter-slice";
 
 function Counter() {
-  const [counterAmount, setCounterAmount] = useState(1);
+  const counterAmount = useGlobalAppSelector(
+    (store) => store.counterAmount.value
+  );
 
   // const count = useGlobalAppSelector(selectCount);
   const count = useGlobalAppSelector((store) => store.counter.value);
@@ -23,7 +27,9 @@ function Counter() {
       <input
         type="text"
         value={counterAmount}
-        onChange={(e) => setCounterAmount(Number(e.target.value))}
+        onChange={(e) =>
+          globalDispatch(setCounterAmount(Number(e.target.value)))
+        }
       />
       <div className="card">
         <button
